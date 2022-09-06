@@ -1,0 +1,38 @@
+body {
+    background-color: #202124;
+    font-family: 'Noto Sans';
+}
+
+.flex {
+    display: flex;
+}
+
+.container {
+    background-color: rgb(60, 64, 67);
+    border-radius: 10px;
+    width: 324px;
+    height: 183px;
+    left: 0px;
+    top: 0px;
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.bottom-right {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+footer {
+    color: white;
+    position: fixed;
+    bottom: 5px;
+    left: 20px;
+    right: 0px;
+    margin-bottom: 0px;
+}
+
+
+/*#footer-word {
+    color: white;
+}*/
