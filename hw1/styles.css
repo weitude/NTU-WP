@@ -1,38 +1,160 @@
 body {
     background-color: #202124;
-    font-family: 'Noto Sans';
+    font-family: 'Noto Sans', serif;
+    margin: 20px;
 }
 
-.flex {
-    display: flex;
-}
 
 .container {
-    background-color: rgb(60, 64, 67);
-    border-radius: 10px;
-    width: 324px;
-    height: 183px;
-    left: 0px;
-    top: 0px;
-    margin-left: auto;
-    margin-right: 10px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 2fr 0.25fr 0.25fr 0.25fr 0.25fr;
+    grid-template-rows: 210px 210px 210px;
 }
 
-.bottom-right {
-    margin-left: auto;
-    margin-right: 10px;
+.box {
+    background-color: rgb(60, 64, 67);
+    border-radius: 5px;
+    color: white;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.big {
+    background: #202124;
+    grid-column: 1;
+    grid-row: 1 / 4;
+}
+
+.a {
+    grid-column: 2 / 4;
+    grid-row: 1;
+}
+
+.b {
+    grid-column: 4 / 6;
+    grid-row: 1;
+}
+
+.c {
+    grid-column: 2 / 4;
+    grid-row: 2;
+}
+
+.d {
+    grid-column: 4 / 6;
+    grid-row: 2;
+}
+
+.e {
+    grid-column: 3 / 5;
+    grid-row: 3;
+}
+
+.mypin{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+.mytext {
+    position: absolute;
+    bottom: 10px;
+    left: 50px;
+}
+
+.micro {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.blackout {
+    width: 30px;
+    height: 30px;
+    background-color: #343639;
+    border-radius: 50%;
+    position: absolute;
+    top: 6px;
+    right: 7px;
+}
+
+.teacher {
+    width: 200px;
+    border-radius: 50%;
+}
+
+.avatar {
+    width: 100px;
+    border-radius: 50%;
 }
 
 footer {
     color: white;
     position: fixed;
-    bottom: 5px;
+    bottom: 30px;
     left: 20px;
-    right: 0px;
-    margin-bottom: 0px;
+    right: 20px;
 }
 
+.flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 
-/*#footer-word {
-    color: white;
-}*/
+}
+
+.item {
+    display: flex;
+}
+
+.item1 {
+    width: 250px;
+}
+
+.item2 {
+    width: 324px;
+    justify-content: space-around;
+    position: relative;
+}
+
+.item3 {
+    width: 250px;
+    justify-content: space-around;
+}
+
+.redout1 {
+    width: 40px;
+    height: 40px;
+    background-color: #e04236;
+    border-radius: 50%;
+    position: absolute;
+    left: 13px;
+    bottom: -3px;
+    z-index: -1;
+}
+
+.redout2 {
+    width: 40px;
+    height: 40px;
+    background-color: #e04236;
+    border-radius: 50%;
+    position: absolute;
+    left: 77px;
+    bottom: -3px;
+    z-index: -1;
+}
+
+.redout3 {
+    width: 60px;
+    height: 40px;
+    background-color: #e04236;
+    border-radius: 20px;
+    position: absolute;
+    left: 262px;
+    bottom: -3px;
+    z-index: -1;
+}
