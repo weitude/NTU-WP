@@ -124,6 +124,13 @@ body {
     border-radius: 50%;
 }
 
+@media (max-width: 900px) or (max-height: 600px) {
+    img {
+        max-width: 50%;
+        height: auto;
+    }
+}
+
 .bottom {
     color: white;
     grid-column: 1 / 6;
