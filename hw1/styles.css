@@ -1,3 +1,5 @@
+/*大綱*/
+
 body {
     background-color: #202124;
     font-family: 'Noto Sans', serif;
@@ -7,84 +9,83 @@ body {
 .container {
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: 2fr 0.25fr 0.25fr 0.25fr 0.25fr;
-    grid-template-rows: 28vh 28vh 28vh 6vh;
+    grid-template-columns: 2fr 1.3fr;
+    grid-template-rows: 85vh 6vh;
 }
 
-.box {
-    background-color: rgb(60, 64, 67);
-    border-radius: 5px;
-    color: white;
+
+/*左上*/
+
+.leftbox {
+    grid-column: 1 / 2;
+    grid-row: 1;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
 }
 
-.big {
-    background: #202124;
-    grid-column: 1;
-    grid-row: 1 / 4;
-}
-
-.a {
-    grid-column: 2 / 4;
-    grid-row: 1;
-}
-
-.b {
-    grid-column: 4 / 6;
-    grid-row: 1;
-}
-
-.c {
-    grid-column: 2 / 4;
-    grid-row: 2;
-}
-
-.d {
-    grid-column: 4 / 6;
-    grid-row: 2;
-}
-
-.e {
-    grid-column: 3 / 5;
-    grid-row: 3;
-}
-
-.mypin {
+.anchored-pin {
     position: absolute;
     bottom: 10px;
     left: 10px;
 }
 
-.big-text {
+.anchored-name {
+    color: white;
     position: absolute;
     bottom: 10px;
     left: 55px;
 }
 
-.right-text {
+.anchored-avatar {
+    width: 200px;
+    border-radius: 50%;
+}
+
+
+/*右上*/
+
+.rightbox {
+    grid-column: 2 / 3;
+    grid-row: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+
+.box {
+    width: 45%;
+    background-color: #3c4043;
+    border-radius: 5px;
+    color: white;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.person-name {
     position: absolute;
     bottom: 10px;
     left: 20px;
 }
 
-.micro {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+.person-avatar {
+    width: 100px;
+    border-radius: 50%;
 }
 
-.blackout {
-    width: 30px;
-    height: 30px;
-    background-color: #343639;
-    border-radius: 50%;
+
+/*每個都有*/
+
+.micro {
     position: absolute;
     top: 6px;
-    right: 7px;
+    right: 6px;
+    width: 30px;
+    height: 30px;
 }
 
 .func {
@@ -112,31 +113,16 @@ body {
     opacity: 80%;
 }
 
-.teacher {
-    width: 200px;
-    border-radius: 50%;
-}
 
-.avatar {
-    width: 100px;
-    border-radius: 50%;
-}
-
-@media (max-width: 900px) or (max-height: 600px) {
-    img {
-        max-width: 50%;
-        height: auto;
-    }
-}
+/*下面*/
 
 .bottom {
     color: white;
-    grid-column: 1 / 6;
-    grid-row: 4;
+    grid-column: 1 / 3;
+    grid-row: 2;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    bottom: 20px;
 }
 
 .item1 {
@@ -160,7 +146,6 @@ body {
 
 .icon {
     text-align: center;
-
     width: 40px;
 }
 
@@ -180,7 +165,7 @@ body {
     left: 0;
 }
 
-.graycircle {
+.gray-circle {
     width: 40px;
     height: 40px;
     background-color: #3b3f42;
@@ -221,4 +206,12 @@ body {
 .boxbox:hover .supText {
     opacity: 1;
     transition: all 0.3s ease-in;
+}
+
+
+@media (max-width: 900px) or (max-height: 600px) {
+    img {
+        max-width: 50%;
+        height: auto;
+    }
 }
