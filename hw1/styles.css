@@ -110,7 +110,7 @@ body {
     transition: all 0.3s ease-in;
 }
 
-.myimage:hover .func {
+.outer-func:hover .func {
     opacity: 90%;
 }
 
