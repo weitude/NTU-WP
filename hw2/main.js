@@ -3,7 +3,7 @@ const anchoredFunc = document.getElementById("anchored-func");
 let boxs = document.getElementsByClassName("box");
 let amount = boxs.length
 let anchored = 1;
-let newAmount = 0
+let totalPeople = 6
 let avatarIndex = 0
 
 const newPerson = [
@@ -71,7 +71,16 @@ function addFunction(target)
     closeBtn.onclick = function ()
     {
         target.remove();
-        newAmount--;
+        totalPeople--;
+        if (totalPeople === 1 && anchored === 0)
+        {
+            document.getElementsByClassName("box")[1].remove();
+            anchoredAvatar.src = "https://i.imgur.com/WbKcMPD.png"
+            anchoredName.innerHTML = "你";
+            let leftbox = document.getElementsByClassName("leftbox");
+            leftbox[0].style.display = "flex";
+            anchored = 1;
+        }
     };
 
     anchorBtn.onclick = function ()
@@ -101,12 +110,13 @@ anchoredFunc.onclick = function ()
     anchored = 0;
 }
 
+
 add.onclick = function ()
 {
-    if (newAmount < 9)
+    if (totalPeople < 15)
     {
         addPeople();
-        newAmount++;
+        totalPeople++;
     }
 }
 
