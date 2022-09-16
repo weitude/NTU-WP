@@ -56,7 +56,6 @@ body {
 .box {
     width: 32%;
     min-width: 160px;
-    /*max-width: 350px;*/
     background-color: #3c4043;
     border-radius: 5px;
     color: white;
@@ -74,8 +73,6 @@ body {
 }
 
 .person-avatar {
-    /*width: 50%;*/
-    /*height: 50%;*/
     height: 12vh;
     border-radius: 50%;
 }
@@ -153,12 +150,11 @@ body {
     display: flex;
     width: 250px;
     min-width: 250px;
-    /*align-items: center;*/
 }
 
 .item2 {
     display: flex;
-    width: 324px;
+    width: 370px;
     min-width: 324px;
     justify-content: space-around;
     align-items: center;
@@ -245,7 +241,6 @@ body {
 }
 
 #add {
-    position: absolute;
-    left: 70%;
     width: 40px;
+    margin-left: 18px;
 }
