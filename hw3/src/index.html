@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+
+<body>
+<div id="root" class="todo-app__root">
+<!--    <img src="./x.png" class="todo-app__item-x" alt="item-x">-->
+    <header class="todo-app__header">
+        <div class="todo-app__title">todos</div>
+    </header>
+    <section class="todo-app__main">
+<ul>
+    <li class="todo-app__item" key={item.id}>
+
+        <div className="todo-app__checkbox">
+            <input type="checkbox" id="2"/>
+            <label htmlFor="2"></label>
+        </div>
+        <h1 class="todo-app__item-detail">{item.text}</h1>
+        <div class="todo-app__clean">
+            <img src="./x.png" class="todo-app__item-x" alt="item-x"/>
+        </div>
+
+
+    </li>
+</ul>
+
+    </section>
+    <footer class="todo-app__footer" id="todo-footer"></footer>
+
+</div>
+</body>
+
+</html>
