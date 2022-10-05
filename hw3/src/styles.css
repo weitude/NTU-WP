@@ -16,7 +16,6 @@ input[type='checkbox'] {
 
 .todo-app__root {
     margin: 0 auto;
-    /* margin-top: 7em; */
     width: 50em;
     display: flex;
     flex-direction: column;
