@@ -129,6 +129,12 @@ input[type='checkbox'] {
     width: 90%;
     transition: opacity 0.3s;
     height: 100%;
+
+}
+
+.todo-app__item-detail :hover {
+    text-decoration: line-through;
+    opacity: 0.5;
 }
 
 .todo-app__footer {
