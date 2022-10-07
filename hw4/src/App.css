@@ -1,0 +1,24 @@
+/****************************************************************************
+  FileName      [ App.css ]
+  PackageName   [ src ]
+  Author        [ Cheng-Hua Lu ]
+  Synopsis      [  ]
+  Copyright     [ 2022 10 ]
+****************************************************************************/
+
+* {
+      font-family: 'Futura', serif;
+}
+
+html,
+body {
+      height: 90%;
+}
+
+.App {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      /*height: 80vh;*/
+}
