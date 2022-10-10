@@ -26,6 +26,13 @@ npm start
 + 當存在已完成的 todo-items 時，會出現 `Clear completed` 按鈕，點擊後會刪除已完成之項目
 + 利用 placeholder 屬性，讓輸入框在沒有輸入值時，會顯示 "What needs to be done?" 提示
 
+## 其他更動
++ 我的 src 資料夾中主要只有以下 3 個檔案：
+  + `index.htnl`
+  + `index.js`
+  + `styles.css`
++ 我左下角的 `? left` 會根據 `All`, `Active` 及 `Completed` 去做變化，顯示當下總共有幾個 items
+
 ---
 
 綜合以上，我認為我已達成所有基本要求與進階要求
