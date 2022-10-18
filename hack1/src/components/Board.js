@@ -15,10 +15,9 @@ const Board = ({turn, guesses, curGuess}) =>
 {
     return (
         <div className="Board-container">
-            {/* TODO 2-2: show 6 rows (map function is recommended) and defined row's key.
-                Hint: Use `CurRow` instead of `Row` when you are passing `curGuess` into it. */}
             {guesses.map((guess, rowIdx) => (
-                <div className={"Row-container"}
+                <div
+                    className={"Row-container"}
                     id={"row_" + rowIdx}
                     key={"row_" + rowIdx}
                 >
@@ -32,7 +31,6 @@ const Board = ({turn, guesses, curGuess}) =>
                             rowIdx={rowIdx}
                         />
                     }
-
                 </div>
             ))}
         </div>

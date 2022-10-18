@@ -17,7 +17,6 @@ const useWordle = (solution) =>
     const [isCorrect, setIsCorrect] = useState(false);              // A bool whose default is false. It will be set true only when curGuess === solution.
     const [guesses, setGuesses] = useState([...Array(6)]);          // An array whose length is 6. (Ex: [[{char:'c', color:'grey'},{char:'o', color:'grey'},{char:'d', color:'grey'},{char:'e', color:'yellow'},{char:'s', color:'grey'}],[],[],[],[],[]])
 
-    // You can use this function to print all the parameters you want to know.
     const printTest = () =>
     {
         console.log("*-----------------------*");
@@ -39,63 +38,54 @@ const useWordle = (solution) =>
             return "green"
     }
 
+    const toInt = (ch) =>
+    {
+        let ascii = ch.charCodeAt(0) - 97;
+        if (ascii < 0)
+            ascii += 32
+        return ascii
+    }
 
-    // Handle the actions of `Enter`
+
     const handleEnter = () =>
     {
-        // (1) Enter is invalid if turn > 5
         if (turn > 5)
         {
             console.log("Error: You have used all your guesses");
             return;
         }
-        // (2) Enter is invalid if curGuess is not a 5-character string
         if (curGuess.length !== 5)
         {
             console.log("Error: Only ", curGuess.length, " characters are entered!");
             return;
         }
-        // (3) Press Enter, store curGuess to guesses, reset curGuess and update parameters .
 
-        console.log("Press Enter!!!! Store and reset curGuess!");
-        // TODO 4: Check each wordbox's color in `curGuess` and update `guess`, `turn` and `curGuess`
-        // Hint: check green first, and then check yellow.
-        console.log(curGuess)
-        let colors = Array(5).fill(0); //1 yellow 2 green
+        let colors = Array(5).fill(0); // 1 yellow 2 green
         let set = Array(30).fill(0);
         for (let i = 0; i < 5; i++)
         {
-            let ascii = solution[i].charCodeAt(0) - 97;
-            if (ascii < 0)
-                ascii += 32
-            set[ascii]++;
+            set[toInt(solution[i])]++;
         }
         for (let i = 0; i < 5; i++)
         {
             if (curGuess[i] === solution[i])
             {
                 colors[i] = 2;
-                let ascii = solution[i].charCodeAt(0) - 97;
-                if (ascii < 0)
-                    ascii += 32
-                set[ascii]--;
+                set[toInt(solution[i])]--;
             }
         }
         for (let i = 0; i < 5; i++)
         {
             if (colors[i] === 2)
                 continue;
-            let ascii = curGuess[i].charCodeAt(0) - 97;
-            if (ascii < 0)
-                ascii += 32
+            let ascii = toInt(solution[i]);
             for (let j = 0; j < 5; j++)
             {
-
                 if (curGuess[i] === solution[j] && set[ascii] > 0)
                 {
                     colors[i] = 1;
                     set[ascii]--;
-                    break
+                    break;
                 }
             }
         }
@@ -107,73 +97,30 @@ const useWordle = (solution) =>
             {char: curGuess[3], color: retColor(colors[3])},
             {char: curGuess[4], color: retColor(colors[4])}
         ]
-        console.log(newGuesses)
-
         setGuesses(newGuesses)
-        // add the formatted guess generated into guesses.
-
-        // turn += 1
-
         setTurn(turn + 1)
-        // set curGuess to default
-
-
-        // TODO 5: update parameters, check each char usage and show in `Keyboard` and reset `curGuess`.
-        // 5-1) check if curGuess === solution, if true, set `isCorrect` to true.
-
-
-        // 5-2) usedChars update
-        // let clr = Array(26).fill(0)
         let newUsedChars = JSON.parse(JSON.stringify(usedChars));
-
         for (let i = 0; i < 5; i++)
         {
-            let ascii = curGuess[i].charCodeAt(0) - 97;
-            if (ascii < 0)
-                ascii += 32
-            // console.log("now = ", ascii)
-            if (newUsedChars[ascii] === 2)
-            {
-                // console.log("type1")
-                continue;
-            }
-            else if (newUsedChars[ascii] === 1 && colors[i] === 2)
-            {
-                newUsedChars[ascii] = 2;
-                // console.log("type2")
-            }
-            else if (newUsedChars[ascii] === 0)
-            {
-// console.log("type3", )
+            let ascii = toInt(curGuess[i]);
+            if (newUsedChars[ascii] < colors[i])
                 newUsedChars[ascii] = colors[i];
-            }
         }
-        // setUsedChars(clr)
         setUsedChars(newUsedChars)
-        console.log(newUsedChars)
+
         if (curGuess === solution)
-        {
             setIsCorrect(true)
 
-        }
-
-
         setCurGuess("")
-
-
-
     }
 
-    // Handle the action of `Backspace`
     const handleBackspace = () =>
     {
         setCurGuess(curGuess.substring(0, curGuess.length - 1));
     }
 
-    // Handle the action of pressing a character.
     const handleCharacter = (key) =>
     {
-        // If curGuess's length is longer than 5, do nothing
         if (curGuess.length < 5)
         {
             setCurGuess(curGuess + key);
@@ -181,7 +128,6 @@ const useWordle = (solution) =>
     }
     const handleKeyup = ({key}) =>
     {
-        // console.log("You just press: ", key);
         if (key === 'Enter') handleEnter();
         else if (key === 'Backspace') handleBackspace();
         else if (/^[A-Za-z]$/.test(key)) handleCharacter(key);

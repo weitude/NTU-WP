@@ -17,7 +17,6 @@ const CurRow = ({curGuess, rowIdx}) =>
     const len = letters.length
 
     return (
-        // <div className='Row-container'>
         <div className='Row-wrapper current'>
             <div id={rowIdx + "-0"} key={rowIdx + "-0"}
                  className={"Row-wordbox " + state[len]}>{letters[0]}</div>
@@ -30,7 +29,6 @@ const CurRow = ({curGuess, rowIdx}) =>
             <div id={rowIdx + "-4"} key={rowIdx + "-4"}
                  className={"Row-wordbox " + state[len - 4]}>{letters[4]}</div>
         </div>
-        // </div>
     )
 }
 
