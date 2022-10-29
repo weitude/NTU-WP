@@ -28,7 +28,6 @@ yarn start
 ## 其他更動
 
 + 每次產生新遊戲時，會在 console.log 顯示 ans
-+
 
 ---
 
