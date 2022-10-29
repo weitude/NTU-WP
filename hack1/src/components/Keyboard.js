@@ -19,7 +19,6 @@ const Keyboard = ({usedChars}) =>
 
     useEffect(() =>
     {
-        // TODO 1-2: slice `config.letters` into three parts.
         setFirstRowLetters(config.letters.slice(0, 10));
         setSecondRowLetters(config.letters.slice(10, 19));
         setThirdRowLetters(config.letters.slice(19, 29));
