@@ -2,54 +2,48 @@ import React, {useState} from 'react';
 import './App.css';
 import {guess, startGame, restart} from './axios'
 
-function App()
-{
+function App() {
     const [hasStarted, setHasStarted] = useState(false)
     const [hasWon, setHasWon] = useState(false)
     const [number, setNumber] = useState('')
     const [status, setStatus] = useState('')
 
-    const handleStartGame = async () =>
-    {
+    const handleStartGame = async () => {
         const response = await startGame()
-        if (response.msg === 'The game has started.')
-        {
+        if (response.msg === 'The game has started.') {
             setHasStarted(true)
             console.log("ans = ", response.ans)
         }
     }
 
-    const handleGuess = async () =>
-    {
+    const handleGuess = async () => {
         const response = await guess(number)
         if (response === 'Equal')
             setHasWon(true)
-        else
-        {
+        else {
             setStatus(response)
             setNumber('')
         }
     }
 
-    const handleRestart = async () =>
-    {
+    const handleRestart = async () => {
         setHasWon(false)
         setStatus('')
         setNumber('')
         const response = await restart()
-        if (response.msg === 'The game has restarted.')
-        {
+        if (response.msg === 'The game has restarted.') {
             setHasStarted(true)
             console.log("ans = ", response.ans)
         }
     }
 
-    const startMenu =
+    const startMenu = (
         <div>
             <button onClick={handleStartGame}>
                 start game
             </button>
         </div>
+    )
 
     const gameMode = (
         <div>
