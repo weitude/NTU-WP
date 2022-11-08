@@ -12,7 +12,7 @@
 yarn install
 ```
 
-然後要去自行設定 backend 裡面的 `.env.defaults` 檔案
+然後要去自行設定 backend 裡面的 `.env` 檔案
 
 最後回到 `hw6` directory 執行：
 
