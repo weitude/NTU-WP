@@ -5,11 +5,9 @@ export default {
     connect: () => {
         dotenv.config();
         mongoose.connect(
-                process.env.MONGO_URL, {
-                    dbName: "DB",
-                    useNewUrlParser: true,
-                    useUnifiedTopology: true
-                })
-        console.log("mongo db connection created");
+            process.env.MONGO_URL, {
+                dbName: "DB",
+            })
+            .then(() => console.log("mongo db connection created"));
     }
 }
