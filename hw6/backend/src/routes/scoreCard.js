@@ -48,6 +48,7 @@ router.get("/cards", async (req, res) => {
         if (queryType === "name") {
             const q = await ScoreCard.find({name: queryString})
             const len = q.length
+            console.log(len)
             if (len === 0) {
                 res.json({messages: false, message: queryType + ' (' + queryString + ') not found!'})
             }
