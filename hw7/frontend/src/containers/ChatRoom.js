@@ -1,4 +1,4 @@
-import {Input, message, Tabs} from 'antd'
+import {Input, Tabs} from 'antd'
 import styled from 'styled-components';
 import {useEffect, useRef, useState} from "react";
 import {useChat} from "./hooks/useChat";
@@ -51,7 +51,7 @@ const ChatRoom = () => {
     useEffect(() => {
         const newChatBoxes = chatBoxes.map(obj => {
             if (obj.label === activeKey) {
-                return {...obj, children: extractChat(activeKey)};
+                return {...obj, children: renderChat(messages)};
             }
             return obj;
         });
@@ -61,8 +61,6 @@ const ChatRoom = () => {
     const scrollToBottom = () => {
         msgFooter.current?.scrollIntoView({behavior: 'smooth', block: "end"});
     };
-
-
 
     const renderChat = (chat) => {
         return (
@@ -76,12 +74,8 @@ const ChatRoom = () => {
         )
     };
 
-    const extractChat = (friend) => {
-        return renderChat(messages.filter(({sender}) => (sender === friend) || (sender === me)))
-    }
-
     const createChatBox = (friend) => {
-        const chat = extractChat(friend);
+        const chat = renderChat(messages);
         setChatBoxes([...chatBoxes, {
             label: friend,
             children: chat,
