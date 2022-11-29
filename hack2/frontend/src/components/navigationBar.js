@@ -21,7 +21,7 @@ const NavBar = () => {
 
     const [display, setDisplay] = useState("")
     const options = ["price", "distance"];
-    const [sortMethod, setSortMethod] = useState(options[0]);
+    const [sortMethod, setSortMethod] = useState("price");
     // Blank all
     const [filterExpanded, setFilterExpanded] = useState(false);
 
