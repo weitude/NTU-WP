@@ -12,10 +12,10 @@ import Info from '../models/info'
 
 exports.GetSearch = async (req, res) => {
     /*******    NOTE: DO NOT MODIFY   *******/
-    const priceFilter = req.query.priceFilter
-    const mealFilter = req.query.mealFilter
-    const typeFilter = req.query.typeFilter
-    const sortBy = req.query.sortBy
+    let priceFilter = req.query.priceFilter
+    let mealFilter = req.query.mealFilter
+    let typeFilter = req.query.typeFilter
+    let sortBy = req.query.sortBy
     console.log(req.query)
     /****************************************/
 
@@ -24,25 +24,108 @@ exports.GetSearch = async (req, res) => {
     // When success, 
     //   do `res.status(200).send({ message: 'success', contents: ... })`
     // When fail,
-    //   do `res.status(403).send({ message: 'error', contents: ... })` 
+    //   do `res.status(403).send({ message: 'error', contents: ... })`
+    let plen
+    if (!priceFilter)
+        priceFilter = []
+    plen = priceFilter.length
+
+    let mlen
+    if (!mealFilter)
+        mealFilter = []
+    mlen = mealFilter.length
+
+    let tlen
+    if (!typeFilter)
+        typeFilter = []
+    tlen = typeFilter.length
+
+    if (plen === 0) {
+        priceFilter.push("$")
+        priceFilter.push("$$")
+        priceFilter.push("$$$")
+    }
+    else {
+        let temp = priceFilter[0]
+        for (let i = plen; i < 3; i++) {
+            priceFilter.push(temp)
+
+        }
+    }
+    for (let i = 0; i < 3; i++)
+    {
+        if (priceFilter[i] === "$")
+            priceFilter[i] = 1
+        if (priceFilter[i] === "$$")
+            priceFilter[i] = 2
+        if (priceFilter[i] === "$$$")
+            priceFilter[i] = 3
+    }
+    if (mlen === 0) {
+        mealFilter.push("Breakfast")
+        mealFilter.push("Lunch")
+        mealFilter.push("Dinner")
+    }
+    else {
+        let temp = mealFilter[0]
+        for (let i = mlen; i < 3; i++) {
+            mealFilter.push(temp)
+
+        }
+    }
+    if (tlen === 0) {
+        typeFilter.push("Chinese")
+        typeFilter.push("American")
+        typeFilter.push("Italian")
+        typeFilter.push("Japanese")
+        typeFilter.push("Korean")
+        typeFilter.push("Thai")
+    }
+    else {
+        let temp = typeFilter[0]
+        for (let i = tlen; i < 3; i++) {
+            typeFilter.push(temp)
+        }
+    }
+    console.log(priceFilter, mealFilter, typeFilter)
+
 
     // TODO Part I-3-a: find the information to all restaurants
-    if (sortBy === "price")
-    {
-        Info.find({}).sort({price: 1}).exec((err, data) => {
+    if (sortBy === "price") {
+        Info.find({
+            $and: [
+                {$or: [{price: priceFilter[0]}, {price: priceFilter[1]}, {price: priceFilter[2]}]},
+                {$or: [{tag: mealFilter[0]}, {tag: mealFilter[1]}, {tag: mealFilter[2]}]},
+                {
+                    $or: [{tag: typeFilter[0]}, {tag: typeFilter[1]}, {tag: typeFilter[2]},
+                        {tag: typeFilter[3]}, {tag: typeFilter[4]}, {tag: typeFilter[5]}]
+                }
+            ]
+        }).sort({price: 1}).exec((err, data) => {
 
             if (err) {
+                console.log("err data", data)
+
                 res.status(403).send({message: 'error', contents: []})
             }
             else {
+                console.log("data", data)
                 res.status(200).send({message: 'success', contents: data})
             }
         })
     }
 
-    else if (sortBy === "distance")
-    {
-        Info.find({}).sort({distance: 1}).exec((err, data) => {
+    else if (sortBy === "distance") {
+        Info.find({
+            $and: [
+                {$or: [{price: priceFilter[0]}, {price: priceFilter[1]}, {price: priceFilter[2]}]},
+                {$or: [{tag: mealFilter[0]}, {tag: mealFilter[1]}, {tag: mealFilter[2]}]},
+                {
+                    $or: [{tag: typeFilter[0]}, {tag: typeFilter[1]}, {tag: typeFilter[2]},
+                        {tag: typeFilter[3]}, {tag: typeFilter[4]}, {tag: typeFilter[5]}]
+                }
+            ]
+        }).sort({distance: 1}).exec((err, data) => {
 
             if (err) {
                 res.status(403).send({message: 'error', contents: []})

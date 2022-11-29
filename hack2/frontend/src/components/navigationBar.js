@@ -42,6 +42,7 @@ const NavBar = () => {
         navigate('/search', {
             state: {
                 priceFilter: priceFilter,
+
                 mealFilter: mealFilter,
                 typeFilter: typeFilter,
                 sortBy: sortMethod
