@@ -1,5 +1,6 @@
 import {Input} from 'antd'
 import {UserOutlined} from "@ant-design/icons";
+import React from "react";
 
 const LogIn = ({me, setMe, onLogin}) => {
     return (
