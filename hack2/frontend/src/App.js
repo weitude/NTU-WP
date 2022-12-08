@@ -8,7 +8,7 @@
 
 import './css/App.css';
 
-import { React, useState, useEffect } from 'react'
+import React from "react";
 import NavBar from './components/navigationBar';
 import MainPage from './container/mainPage';
 import SearchPage from './container/searchPage';
