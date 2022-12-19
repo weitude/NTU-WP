@@ -1,30 +1,31 @@
-import React from "react";
-import {createContext, useContext, useEffect, useState} from "react";
+import React, {createContext, useContext, useEffect, useRef, useState} from "react";
 import {message} from "antd";
 
-const ChatContext = createContext();
-const client = new WebSocket('ws://localhost:4000')
+
+const ChatContext = createContext(
+
+
+);
+
+/*const client = new WebSocket('ws://localhost:4000')
 
 const sendData = async (data) => {
     await client.send(JSON.stringify(data));
-};
+};*/
 
 const ChatProvider = (props) => {
-    const LOCALSTORAGE_KEY = "save-me";
-    const savedMe = localStorage.getItem(LOCALSTORAGE_KEY);
+    const savedMe = localStorage.getItem("save-me");
     const [status, setStatus] = useState({});
     const [me, setMe] = useState(savedMe || "");
     const [signedIn, setSignedIn] = useState(false);
-    const [messages, setMessages] = useState([]);
-    const [chatBoxName, setChatBoxName] = useState("")
 
     useEffect(() => {
         if (signedIn) {
-            localStorage.setItem(LOCALSTORAGE_KEY, me);
+            localStorage.setItem("save-me", me);
         }
     }, [signedIn]);
 
-    client.onmessage = (byteString) => {
+    /*client.onmessage = (byteString) => {
         const {data} = byteString;
         const [task, payload] = JSON.parse(data);
 
@@ -44,26 +45,19 @@ const ChatProvider = (props) => {
             default:
                 break;
         }
-    }
-
-    const startChat = (from, to) => {
-        sendData(["start", {from, to}])
-    }
-
-    const sendMessage = (payload) => {
-        sendData(["input", payload]);
-    }
+    }*/
 
     const displayStatus = (s) => {
+        console.log("displayStatus:", s)
         if (s.msg) {
             const {type, msg} = s;
             const content = {content: msg, duration: 0.5}
             switch (type) {
                 case 'success':
-                    message.success(content)
+                    message.success(content).then(() => console.log("success"))
                     break
                 case 'error':
-                    message.error(content)
+                    message.error(content).then(() => console.log("error"))
                     break
                 default:
                     break
@@ -74,8 +68,10 @@ const ChatProvider = (props) => {
     return (
         <ChatContext.Provider
             value={{
-                status, me, setMe, signedIn, setSignedIn, messages, chatBoxName, setChatBoxName,
-                sendMessage, startChat, displayStatus
+                // data, sendMessage, startChat, subscribeToMore,
+                status, me, setMe, signedIn, setSignedIn,
+                // messages, chatBoxName, setChatBoxName, intervalRef,setMessages,
+                displayStatus
             }}
             {...props}
         />

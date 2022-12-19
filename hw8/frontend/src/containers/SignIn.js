@@ -1,7 +1,7 @@
 import React from "react";
 import Title from "../components/Title";
 import LogIn from "../components/LogIn";
-import {useChat} from "./hooks/useChat";
+import {useChat} from "../hooks/useChat";
 
 const SignIn = () => {
     const {me, setMe, setSignedIn, displayStatus} = useChat();

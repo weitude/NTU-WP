@@ -1,12 +1,12 @@
 import {Input, Tabs} from 'antd'
 import styled from 'styled-components';
-import {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useChat} from "./hooks/useChat";
 import Title from "../components/Title";
 import Message from "../components/Message";
 import ChatModal from "../components/ChatModal";
 
-const ChatBoxesWrapper = styled.div`
+const ChatBoxesWrapper = styled(Tabs)`
   width: 100%;
   height: 400px;
   background: #eeeeee52;
@@ -101,28 +101,26 @@ const ChatRoom = () => {
     return (
         <>
             <Title name={me}/>
-            <ChatBoxesWrapper>
-                <Tabs
-                    type="editable-card"
-                    onChange={(key) => {
-                        setActiveKey(key);
-                        setChatBoxName(makeName(me, key))
-                        startChat(me, key);
-                    }}
-                    activeKey={activeKey}
-                    onEdit={(targetKey, action) => {
-                        if (action === 'add')
-                            setModalOpen(true);
-                        else if (action === 'remove') {
-                            const ret = removeChatBox(targetKey, activeKey)
-                            setActiveKey(ret);
-                            setChatBoxName(makeName(me, ret))
-                            startChat(me, ret);
-                        }
-                    }}
-                    items={chatBoxes}
-                />
-            </ChatBoxesWrapper>
+            <ChatBoxesWrapper
+                type="editable-card"
+                onChange={(key) => {
+                    setActiveKey(key);
+                    setChatBoxName(makeName(me, key))
+                    startChat(me, key);
+                }}
+                activeKey={activeKey}
+                onEdit={(targetKey, action) => {
+                    if (action === 'add')
+                        setModalOpen(true);
+                    else if (action === 'remove') {
+                        const ret = removeChatBox(targetKey, activeKey)
+                        setActiveKey(ret);
+                        setChatBoxName(makeName(me, ret))
+                        startChat(me, ret);
+                    }
+                }}
+                items={chatBoxes}
+            />
 
             <ChatModal
                 open={modalOpen}

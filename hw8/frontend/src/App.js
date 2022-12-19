@@ -1,5 +1,5 @@
 import React from "react";
-import {useChat} from "./containers/hooks/useChat";
+import {useChat} from "./hooks/useChat";
 import SignIn from "./containers/SignIn";
 import ChatRoom from "./containers/ChatRoom";
 import styled from "styled-components";
@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 90vh;
   width: 500px;
   margin: auto;
 `;

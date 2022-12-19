@@ -1,0 +1,20 @@
+type Query {
+    chatbox(chatBoxName: String!): ChatBox!
+}
+type ChatBox {
+    name: String!
+    messages : [Message!]
+}
+type Message {
+    body: String!
+    sender: String!
+}
+
+type Mutation {
+    createChatBox(from: String, to: String): ChatBox!
+    createMessage(from: String!, to: String!, body: String!): Message!
+}
+
+type Subscription {
+    message(chatBoxName: String!): Message!
+}
