@@ -96,7 +96,7 @@ const publicExampleData = [
 
 const dataInit = async () => {
   await itemModel.deleteMany({});
-  await itemModel.insertMany(publicExampleData);
+  await itemModel.insertMany(example);
   console.log("Database initialized!");
 };
 
