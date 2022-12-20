@@ -41,10 +41,11 @@ function Row({
   };
 
   const handleSubmitEdit = (formData) => {
+    console.log("formData:", formData)
     updateItem({
       variables: {
         // TODO 4 Use `updateItem` and pass the correct variables
-        input:formData,
+        input:{...formData, id:item.id},
       },
         // TODO End
         onError: (err) => {
