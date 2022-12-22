@@ -45,30 +45,38 @@ const ChatRoom = () => {
     const [chatBoxes, setChatBoxes] = useState([])
     const [activeKey, setActiveKey] = useState("")
     const [modalOpen, setModalOpen] = useState(false);
-    // const [messages, setMessages] = useState([]);
+    const [messages, setMessages] = useState([]);
     const [chatBoxName, setChatBoxName] = useState("")
     const chatBoxNameRef = useRef(null);
     const msgFooter = useRef(null)
 
     // console.log("chatBoxNameRef", chatBoxNameRef)
-    const [getMessages, {loading, error, data, subscribeToMore}] = useLazyQuery(CHATBOX_QUERY);
+    const [getMessages, {loading, error, data, subscribeToMore}] = useLazyQuery(CHATBOX_QUERY,{onCompleted: someData => {
+
+            console.log("someData",someData.chatbox.messages)
+        // console.log("data",data.chatbox.messages)
+            setMessages(someData.chatbox.messages)
+        /* do your staff */
+    }});
 
 
     // const {data, loading, subscribeToMore}
     //     = useQuery(CHATBOX_QUERY, {variables: {chatBoxName: chatBoxName}});
-    const [startChat] = useMutation(CREATE_CHATBOX_MUTATION);
+    // const [startChat] = useMutation(CREATE_CHATBOX_MUTATION);
     const [sendMessage] = useMutation(CREATE_MESSAGE_MUTATION);
 
-    /*useEffect(() => {
+   /* useEffect(() => {
         if (!loading && data)
             setMessages(data.chatbox.messages)
     }, [data]);*/
 
     useEffect(() => {
-        chatBoxNameRef.current = chatBoxName
-        console.log("chatBoxNameRef.current 2 =", chatBoxNameRef.current)
-        getMessages({variables: {chatBoxName: chatBoxNameRef.current}}).then(() => console.log("success getMessages",chatBoxNameRef.current ))
 
+        chatBoxNameRef.current = chatBoxName
+        getMessages({variables: {chatBoxName: chatBoxNameRef.current}}).then()
+        console.log("chatBoxNameRef.current 2 =", chatBoxNameRef.current)
+        // await getMessages({variables: {chatBoxName: chatBoxNameRef.current}})
+        // console.log (getMessages({variables: {chatBoxName: chatBoxNameRef.current}}))
     }, [chatBoxName]);
 
     useEffect(() => {
@@ -81,19 +89,20 @@ const ChatRoom = () => {
 
     useEffect(() => {
         console.log("useEffect data start!")
-        if (!loading && data)
-        {
-            const newChatBoxes = chatBoxes.map(obj => {
-                if (obj.label === activeKey) {
-                    return {...obj, children: renderChat(data.chatbox.messages)};
-                }
-                return obj;
-            });
-            setChatBoxes(newChatBoxes)
-        }
+        // if (!loading && data)
+        // {
+        const newChatBoxes = chatBoxes.map(obj => {
+            if (obj.label === activeKey) {
+                return {...obj, children: renderChat(messages)};
+            }
+            return obj;
+        });
+        setChatBoxes(newChatBoxes)
+        // }
         console.log("useEffect data end!")
 
-    }, [data])
+    }, [messages])
+
 
     const scrollToBottom = () => {
         msgFooter.current?.scrollIntoView({behavior: 'smooth', block: "end"});
@@ -114,8 +123,8 @@ const ChatRoom = () => {
 
     const createChatBox = (friend) => {
         console.log("friend:", friend)
-        console.log("messages =", data.chatbox.messages)
-        const chat = renderChat(data.chatbox.messages);
+        console.log("messages =", messages)
+        const chat = renderChat(messages);
         setChatBoxes([...chatBoxes, {
             label: friend,
             children: chat,
@@ -124,14 +133,14 @@ const ChatRoom = () => {
         return friend;
     }
 
-    const openModal = async(name)=>{
+    const openModal = async (name) => {
         console.log("name =", name)
         setChatBoxName(makeName(me, name))
         console.log("chatBoxNameRef.current 1 =", chatBoxNameRef.current)
         // await getMessages({variables: {chatBoxName: chatBoxName}})
 
-        const ret = await startChat({variables: {from: me, to: name}});
-        console.log("dbg1", ret)
+        // const ret = await startChat({variables: {from: me, to: name}});
+        // console.log("dbg1", ret)
         // startChat(me, name);
         createChatBox(name)
         // handleSubmit()
@@ -140,7 +149,7 @@ const ChatRoom = () => {
         setModalOpen(false);
     }
 
-    const removeChatBox =async (targetKey, activeKey) => {
+    const removeChatBox = async (targetKey, activeKey) => {
         const index = chatBoxes.findIndex(({key}) => key === activeKey);
         const newChatBoxes = chatBoxes.filter(({key}) => key !== targetKey);
         const len = newChatBoxes.length
@@ -156,7 +165,7 @@ const ChatRoom = () => {
         console.log("ret:", ret)
         setActiveKey(ret);
         console.log("after remove, chatBoxName:", chatBoxName)
-        await startChat({variables: {from: me, to: ret}});
+        // await startChat({variables: {from: me, to: ret}});
 
         setChatBoxes(newChatBoxes);
         return ret
@@ -167,15 +176,17 @@ const ChatRoom = () => {
         if (chatBoxNameRef.current) {
             const unsubscribe = subscribeToMore({
                 document: MESSAGE_SUBSCRIPTION,
-                variables: {chatBoxName: chatBoxNameRef.current},
+                variables: {chatBoxName: chatBoxName},
                 updateQuery: (prev, {subscriptionData}) => {
                     if (!subscriptionData.data) return prev;
                     const newMessage = subscriptionData.data.message;
                     console.log("subscribeToMore")
+                    // prev.chatbox.messages = messages
+                    console.log("subscribe messages:", messages)
                     return {
-                        ...prev,
+                        // ...prev,
                         chatbox: {
-                            name: prev.chatbox.name,
+                            name: chatBoxName,
                             messages: [...prev.chatbox.messages, newMessage],
                             __typename: "ChatBox"
                         },
@@ -187,40 +198,23 @@ const ChatRoom = () => {
 
     }, [subscribeToMore, activeKey]);
 
-    const handleSubmit = () => {
-        if (chatBoxNameRef.current) {
-            try {
-                const unsubscribe = subscribeToMore({
-                    document: MESSAGE_SUBSCRIPTION,
-                    variables: {chatBoxName: chatBoxNameRef.current},
-                    updateQuery: (prev, {subscriptionData}) => {
-                        if (!subscriptionData.data) return prev;
-                        const newMessage = subscriptionData.data.message;
-                        return {
-                            chatbox: {
-                                name: prev.chatbox.name,
-                                messages: [...prev.chatbox.messages, newMessage],
-                                __typename: "ChatBox"
-                            },
-                        };
-                    },
-                });
-                return () => unsubscribe();
-            } catch (e) {
-                console.log(e)
-            }
-        }
-    }
-
     return (
         <>
             <Title name={me}/>
             <ChatBoxesWrapper
                 type="editable-card"
                 onChange={async (key) => {
-                    setActiveKey(key);
+
+                    // const ret =await getMessages({variables: {chatBoxName: makeName(me, key)}}).then(() => console.log("onChange getMessages"))
+                    // console.log("onChange ret:", ret)
+                    //
+                    // if (!loading)
+                    //     setMessages(ret.data.chatbox.messages)
+                    // const ret = await startChat({variables: {from: me, to: key}});
+                    // setMessages(ret.data.createChatBox.messages)
                     setChatBoxName(makeName(me, key))
-                    await startChat({variables: {from: me, to: key}});
+
+                    setActiveKey(key);
                 }}
                 activeKey={activeKey}
                 onEdit={async (targetKey, action) => {
@@ -249,8 +243,8 @@ const ChatRoom = () => {
                         console.log("chatBoxNameRef.current 1 =", chatBoxNameRef.current)
                         // await getMessages({variables: {chatBoxName: chatBoxName}})
 
-                        const ret = await startChat({variables: {from: me, to: name}});
-                        console.log("ret =", ret)
+                        // const ret = await startChat({variables: {from: me, to: name}});
+                        // console.log("ret =", ret)
                         // startChat(me, name);
                         createChatBox(name)
                         console.log("after createChatBox, data:", data)
@@ -292,11 +286,11 @@ const ChatRoom = () => {
                     setBody("")
                 }}
             ></Input.Search>
-            <button
+            {/*<button
                 onClick={() => getMessages({variables: {chatBoxName: chatBoxName}})
                 }>
                 chatBoxName
-            </button>
+            </button>*/}
 
         </>
     )

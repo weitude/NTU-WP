@@ -7,6 +7,7 @@ const Query = {
         if (!box) {
             box = await ChatBoxModel.create({name: chatBoxName});
         }
+        console.log("Query:",box.name, box.__v)
         return box;
     },
 };

@@ -13,9 +13,11 @@ const checkOutChatBox = async (chatBoxName, ChatBoxModel) => {
 
 
 const Mutation = {
-    createChatBox: (parent, {from, to}, {ChatBoxModel}) => {
+    createChatBox:async (parent, {from, to}, {ChatBoxModel}) => {
         const chatBoxName = makeName(from, to);
-        return checkOutChatBox(chatBoxName, ChatBoxModel);
+        const ret = await checkOutChatBox(chatBoxName, ChatBoxModel)
+        console.log("createChatBox:", ret.__v)
+        return ret;
     },
     createMessage: async (parent, {from, to, body}, {ChatBoxModel, pubsub}) => {
         const chatBoxName = makeName(from, to);
@@ -24,7 +26,8 @@ const Mutation = {
         const newMsg = {sender: from, body: body};
         chatBox.messages.push(newMsg);
         await chatBox.save();
-        console.log("test:",`${chatBoxName}`)
+        console.log("from:", from, "to:", to, "body:", body, chatBox.__v)
+        // console.log("test:",`${chatBoxName}`)
         pubsub.publish(chatBoxName, {
             message: newMsg,
         });

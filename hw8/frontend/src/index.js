@@ -31,7 +31,12 @@ const client = new ApolloClient({
                 keyFields: ["custom-id-field"],
             },
         },
-    }*/)
+    }*/),
+    defaultOptions: {
+        watchQuery: {
+            fetchPolicy: "network-only",
+        },
+    }
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
