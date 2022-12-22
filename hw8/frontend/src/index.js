@@ -13,7 +13,6 @@ const httpLink = new HttpLink({
 });
 const wsLink = new GraphQLWsLink(createClient({
     url: 'ws://localhost:5000/graphql',
-    // options: {lazy: true},
 }));
 
 const splitLink = split(({query}) => {
@@ -24,18 +23,9 @@ const splitLink = split(({query}) => {
 
 const client = new ApolloClient({
     link: splitLink,
-    // cache: new InMemoryCache(),
-    cache: new InMemoryCache(/*{
-        typePolicies: {
-            Product: {
-                keyFields: ["custom-id-field"],
-            },
-        },
-    }*/),
+    cache: new InMemoryCache(),
     defaultOptions: {
-        watchQuery: {
-            fetchPolicy: "network-only",
-        },
+        watchQuery: {fetchPolicy: "network-only"},
     }
 });
 
@@ -47,20 +37,3 @@ root.render(
         </ChatProvider>
     </ApolloProvider>
 );
-
-
-/*
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import "antd/dist/antd.css";
-import {ChatProvider} from "./containers/hooks/useChat";
-
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-    <ChatProvider>
-        <App/>
-    </ChatProvider>
-);*/
