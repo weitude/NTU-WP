@@ -25,7 +25,7 @@ const client = new ApolloClient({
     link: splitLink,
     cache: new InMemoryCache(),
     defaultOptions: {
-        watchQuery: {fetchPolicy: "network-only"},
+        watchQuery: {fetchPolicy: "network-only"}
     }
 });
 
