@@ -8,8 +8,8 @@
 
 接著先將 hw6 的內容直接複製到 repo 中，進行初始化
 
-- frontend: [https://weitude.github.io/ScoreCard/](https://weitude.github.io/ScoreCard/)
-- backend: [https://weitude-scorecard.up.railway.app/](https://weitude-scorecard.up.railway.app/health)
+- frontend: [https://weitude.github.io/ScoreCard](https://weitude.github.io/ScoreCard/)
+- backend: [https://weitude-scorecard.up.railway.app](https://weitude-scorecard.up.railway.app)
 
   可利用 [https://weitude-scorecard.up.railway.app/health](https://weitude-scorecard.up.railway.app/health) 來檢查
   server 是否運作
