@@ -1,0 +1,39 @@
+.postWrapper {
+    height: 80vh;
+    padding: 20px;
+}
+
+.loading {
+    text-align: center;
+}
+
+.title {
+    color: #4f2f0c;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.postContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start
+}
+
+.postBox {
+    width: 40%;
+    height: 72vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.paper {
+    height: 100%;
+    padding: 20px;
+    white-space: break-spaces;
+    width: 80%;
+    overflow: scroll;
+}
