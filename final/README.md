@@ -126,7 +126,7 @@ yarn start
 
 2. Admin:
 
-   帳號：test2；密碼：test2
+   帳號：1；密碼：123
 
 # 組員之負責項目
 
