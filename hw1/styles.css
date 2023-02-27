@@ -6,7 +6,7 @@ body {
     margin: 20px;
 }
 
-.container {
+.wrapper {
     display: flex;
     height: 85vh;
     gap: 10px;
@@ -53,7 +53,7 @@ body {
     flex-grow: 0.8;
 }
 
-.box {
+.container {
     width: 45%;
     min-width: 160px;
     background-color: #3c4043;
@@ -189,7 +189,7 @@ body {
     z-index: -1;
 }
 
-.boxbox {
+.box {
     display: flex;
     position: relative;
     align-items: center;
@@ -205,11 +205,11 @@ body {
     margin-bottom: 90px;
 }
 
-.boxbox .supText {
+.box .supText {
     transition: all 0.3s ease-out;
 }
 
-.boxbox:hover .supText {
+.box:hover .supText {
     opacity: 1;
     transition: all 0.3s ease-in;
 }
