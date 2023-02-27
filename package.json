@@ -1,0 +1,19 @@
+{
+  "name": "ntu-wp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:weitude/NTU-WP.git",
+  "author": "weitude <eric.c.w.lin@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.2",
+    "prettier": "^2.8.4"
+  },
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,json,html,css}": "prettier --write"
+  }
+}
