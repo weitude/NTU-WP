@@ -1,11 +1,3 @@
-/****************************************************************************
- FileName      [ Keyboard.js ]
- PackageName   [ src/components ]
- Author        [ Cheng-Hua Lu ]
- Synopsis      [ This file generates the Keyboard. ]
- Copyright     [ 2022 10 ]
- ****************************************************************************/
-
 import "./css/Keyboard.css";
 import config from "../data/config.json";
 import React, { useEffect, useState } from "react";

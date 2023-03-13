@@ -1,15 +1,15 @@
 import "./css/Wordle.css";
+import { useEffect, useState } from "react";
 import Board from "./Board";
 import Keyboard from "./Keyboard";
 import useWordle from "./hooks/useWordle";
-import React, { useEffect, useState } from "react";
 
 const Wordle = ({ solution }) => {
   const { turn, curGuess, guesses, isCorrect, usedChars, handleKeyup } =
     useWordle(solution);
   const [result, setResult] = useState("");
-  const [gameOver, setGameOver] = useState(false); // A bool whose default is false. It will be set to turn when the game is ended.
-  const [win, setWin] = useState(false); // A bool whose default is false. It will be set to turn when the player wins the game.
+  const [gameOver, setGameOver] = useState(false);
+  const [win, setWin] = useState(false);
 
   useEffect(() => {
     window.addEventListener("keyup", handleKeyup);

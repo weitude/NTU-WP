@@ -1,5 +1,4 @@
 import "./css/Row.css";
-import React from "react";
 
 const Row = ({ guess, rowIdx }) => {
   if (guess) {

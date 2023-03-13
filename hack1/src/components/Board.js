@@ -1,6 +1,5 @@
-import Row from "./Row";
 import "./css/Board.css";
-import React from "react";
+import Row from "./Row";
 import CurRow from "./CurRow";
 
 const Board = ({ turn, guesses, curGuess }) => {

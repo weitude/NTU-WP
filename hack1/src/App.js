@@ -1,7 +1,7 @@
 import "./App.css";
 import config from "./data/config.json";
 import Wordle from "./components/Wordle";
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const App = () => {
   const solutions = config.solutions;
