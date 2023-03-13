@@ -8,20 +8,23 @@
 // *
 // * ////////////////////////////////////////////////////////////////////////
 
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
-const CommentSchema = Schema({
+const CommentSchema = new Schema(
+  {
     restaurantId: { type: Number, required: true },
     name: { type: String, required: true },
     rating: { type: Number, required: true },
-    content: { type: String, required: true }
-}, {
-    collection: 'Comment',
-    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
-})
+    content: { type: String, required: true },
+  },
+  {
+    collection: "Comment",
+    timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
+  },
+);
 
-const exportSchema = mongoose.model('Comment', CommentSchema)
+const exportSchema = mongoose.model("Comment", CommentSchema);
 
-export default exportSchema
+export default exportSchema;

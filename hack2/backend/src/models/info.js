@@ -8,23 +8,26 @@
 // *
 // * ////////////////////////////////////////////////////////////////////////
 
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
-const InfoSchema = Schema({
+const InfoSchema = new Schema(
+  {
     id: { type: Number, required: true },
     name: { type: String, required: true },
     tag: [{ type: String }],
     img: { type: String },
     time: { type: Schema.Types.Mixed },
     distance: { type: Number },
-    price: { type: Number }
-}, {
-    collection: 'Restaurant',
-    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
-})
+    price: { type: Number },
+  },
+  {
+    collection: "Restaurant",
+    timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
+  },
+);
 
-const exportSchema = mongoose.model('Restaurant', InfoSchema)
+const exportSchema = mongoose.model("Restaurant", InfoSchema);
 
-export default exportSchema
+export default exportSchema;
