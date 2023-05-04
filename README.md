@@ -6,9 +6,7 @@ This is my web programming homework projects in National Taiwan University.
 
 ### hack1: Wordle
 
-![hack1](https://i.imgur.com/3LH95uQ.png)
 - React
-
 
 ### hack2: Hugo Eat
 
